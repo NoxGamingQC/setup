@@ -29,7 +29,14 @@ function chooseSystem() {
 }
 
 function ubuntu() {
-    exitScript
+    echo "Do you want to use your computer to code? (y/n)"
+    read -n 1 -s -r installCode
+    if [[ "$installCode" == "y" || "$installCode" == "Y" ]]; then
+        
+        exitScript
+    else
+        exitScript
+    fi
 }
 
 function exitScript() {
@@ -41,9 +48,11 @@ function exitScript() {
 # Main
 if [[ $EUID -eq 0 ]]; then
     clear
+    echo "Hey, so how this script work, select Y or y to install the requested packages. Any invalid answer will result to not installing the packages. You can rerun the script to install the missing packages. To uninstall a list of package are available in our readme."
+    echo ""
     chooseSystem
 else
-    echo -e "${red}ERROR: This script requires root privileges to install apps. Aborting ...${noColor}"
+    echo -e "${red}ERROR: This script requires root privileges. Aborting ...${noColor}"
 fi
 
 
